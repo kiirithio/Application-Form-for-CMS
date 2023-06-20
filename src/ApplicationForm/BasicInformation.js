@@ -54,6 +54,25 @@ export default props => {
   const [academic_year, handleAcademicYearChange] = useFormInput('', 'academic_year');
   const [academic_term, handleAcademicTermChange] = useFormInput('', 'academic_term');
 
+  const handleEmailCheck = () => {
+    const studentEmail = user.student_email_id; 
+  
+    axios
+      .post(API_URL + 'check_if_email_exists', { email: studentEmail })
+      .then((response) => {
+        const emailExists = response.data;
+        if (emailExists) {
+          // window.alert('Email already exists.')
+        } else {
+          // Email does not exist
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  
+
 
   return (
     <Grid container spacing={2}>
@@ -114,6 +133,7 @@ export default props => {
             shrink: true
           }}
           error={!!errors["student_email_id"]}
+          onBlur={handleEmailCheck}
           required
           fullWidth
         />

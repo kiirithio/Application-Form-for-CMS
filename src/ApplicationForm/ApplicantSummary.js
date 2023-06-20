@@ -6,8 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
   Grid,
-  Checkbox,
-  FormControlLabel
 } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -54,33 +52,6 @@ export default props => {
         <Grid item xs={12} lg={6}>
           <Typography variant='h6'>Date of Birth</Typography>
           <Typography variant='body2'>{applicantData.date_of_birth}</Typography>
-        </Grid>
-      </Grid>
-      <Grid container>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.user.newsletter}
-                color='primary'
-                name='newsletter'
-              />
-            }
-            label='Sign me up for Newsletter, to receive regular updates.'
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.user.acceptTerms}
-                required
-                color='primary'
-                name='acceptTerms'
-              />
-            }
-            label='I accept terms and conditions'
-          />
         </Grid>
       </Grid>
     </Fragment>

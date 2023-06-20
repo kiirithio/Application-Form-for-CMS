@@ -10,12 +10,22 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center"
   },
   title: {
-    padding: theme.spacing(5, 0)
+    padding: theme.spacing(2),
+    fontFamily: 'Roboto',
+    fontSize: '1.375rem',
+    fontWeight: 500,
+    lineHeight: 1.57,
+    letterSpacing: '0.00714em',
+    color: theme.palette.text.primary
+  },  
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: theme.spacing(3)
   },
-  fragment: {
-    display: 'flex', 
-    justifyContent: 'center',
-    margin: 'auto'
+  button: {
+    margin: theme.spacing(2, 0)
   }
 }));
 
@@ -25,13 +35,21 @@ export default () => {
     window.location.reload();
   };
   return (
-    <Fragment className={classes.fragment}>
+    <Fragment>
       <Typography variant='h5' className={classes.title}>
-        Congratulations! You have completed  the application process.
+      Thank you for completing the application process! 
+      <br /> <br /> <br />
+      We will review your submission and contact you with further information in due course.
       </Typography>
-      <Button variant='contained' color='primary' onClick={reload}>
-        Reload
-      </Button>
+      <div className={classes.buttonContainer}>
+        <Button variant='contained' color='primary' onClick={reload} className={classes.button}>
+          Make Another Application
+        </Button>
+        <Button variant='contained' color='primary' onClick={reload} className={classes.button}>
+          Visit School Website
+        </Button>
+      </div>
+     
     </Fragment>
   );
 };

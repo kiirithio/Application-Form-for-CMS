@@ -26,7 +26,7 @@ export default props => {
       national_id: "",
       acceptTerms: false,
       newsletter: false,
-      certificate: ""
+      selectedFile: []
     },
     errors: {}
   });

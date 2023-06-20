@@ -54,20 +54,29 @@ const useStyles = makeStyles(theme => ({
   icon: {
     marginRight: theme.spacing(1)
   },
-  footer: {
-    padding: theme.spacing(5),
+  footerWrapper: {
     display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    textAlign: "center",
-    [theme.breakpoints.down("sm")]: {
-      flexGrow: 1
-    },
+    justifyContent: "flex-end",
     position: "fixed",
     bottom: 0,
     left: 0,
-    right: 0
+    right: 0,
+    zIndex: theme.zIndex.drawer + 1
+  },
+  footer: {
+    padding: theme.spacing(5),
+    textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      flexGrow: 1,
+      position: "sticky",
+      bottom: 0,
+      backgroundColor: theme.palette.background.default
+    }
+  },
+  contentWrapper: {
+    paddingBottom: theme.spacing(10)
   }
+  
   
 }));
 
@@ -110,6 +119,18 @@ export default props => {
       setCompleted(true);
     }
   };
+
+
+  const handlePhoneNumberChange = () => {
+    const phoneNumber = applicantData.student_mobile_number
+    if (phoneNumber && phoneNumber.toString().length > 8 && !isNaN(phoneNumber)) {
+      axios
+        .post(API_URL + "post_applicant_phone_number", { phoneNumber: phoneNumber })
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error));
+    }
+  };
+
 
   const handleSubmitData = e => {
     e.preventDefault();
@@ -173,6 +194,7 @@ export default props => {
 
   return (
     <Fragment>
+      <div className={classes.contentWrapper}>
       {!completed && (
         <Box className={classes.root}>
           <Stepper activeStep={activeStep} orientation='vertical'>
@@ -204,7 +226,18 @@ export default props => {
                         >
                           Back
                         </Button>
-                        {activeStep < steps.length - 1 && (
+                        {activeStep === 0 && (
+                          <Button
+                            type='submit'
+                            className={classes.button}
+                            variant='contained'
+                            color='primary'
+                            onClick={handlePhoneNumberChange}
+                          >
+                            Next
+                          </Button>
+                        )}
+                        {activeStep < steps.length - 1 && activeStep !== 0 &&(
                           <Button
                             type='submit'
                             className={classes.button}
@@ -256,7 +289,10 @@ export default props => {
           <FormComplete />
         </Box>
       )}
+      </div>
+      <div className={classes.footerWrapper}>
     <Typography variant='caption' className={classes.footer}>© Copyright 2023 | Upeosoft Limited</Typography>
+    </div>
     </Fragment>
   );
 };
