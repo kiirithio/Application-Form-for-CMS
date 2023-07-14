@@ -5,6 +5,7 @@ import { TextField, Grid, Select, MenuItem, FormControl, InputLabel} from "@mate
 import { isWidthDown } from "@material-ui/core/withWidth";
 //CONTEXT
 import { ApplicantContext } from "./ApplicantContext";
+import { API_URL } from "../constants";
 
 export default props => {
   const [state] = useContext(ApplicantContext);
@@ -12,7 +13,6 @@ export default props => {
   const dateLimit = new Date();
   dateLimit.setFullYear(dateLimit.getFullYear() - 16);
 
-  const API_URL = 'http://127.0.0.1:8007/api/method/upeoeducation.services.rest.';
 
   const [genders, setGenders] = useState([]);
   const [counties, setCounties] = useState([]);
@@ -82,6 +82,7 @@ export default props => {
             onChange={handleGenderChange}
             label="Gender"
             error={!!errors["gender"]}
+            required
           >
             {genders.map((gender, index) => (
               <MenuItem key={index} value={gender.gender}>{gender.gender}</MenuItem>
@@ -119,22 +120,6 @@ export default props => {
           fullWidth
         />
       </Grid>
-      <Grid item xs={12} lg={6}>
-        <FormControl variant="outlined" fullWidth margin='normal'>
-          <InputLabel>County</InputLabel>
-          <Select
-            value={county}
-            name= 'county'
-            onChange={handleCountyChange}
-            label="County"
-            error={!!errors["county"]}
-          >
-            {counties.map((county, index) => (
-              <MenuItem key={index} value={county.county}>{county.county}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Grid>
 
       <Grid item xs={12} lg={6}>
         <FormControl variant="outlined" fullWidth margin='normal'>
@@ -152,7 +137,24 @@ export default props => {
           </Select>
         </FormControl>
       </Grid>
-      
+      {country === 'Kenya' && (
+      <Grid item xs={12} lg={6}>
+        <FormControl variant="outlined" fullWidth margin='normal'>
+          <InputLabel>County</InputLabel>
+          <Select
+            value={county}
+            name= 'county'
+            onChange={handleCountyChange}
+            label="County"
+            error={!!errors["county"]}
+          >
+            {counties.map((county, index) => (
+              <MenuItem key={index} value={county.county}>{county.county}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+      )}
     </Grid>
   );
 };

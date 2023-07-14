@@ -1,17 +1,12 @@
 import React, { useContext, useState } from 'react';
-
-//GENERAL
 import { TextField, Grid } from "@material-ui/core";
-//CONTEXT
 import { ApplicantContext } from "./ApplicantContext";
 
 export default props => {
-
   const [state] = useContext(ApplicantContext);
   const { user, errors } = state;
 
   const [phoneNumber, setPhoneNumber] = useState(user.student_mobile_number);
-
 
   const handlePhoneNumberChange = (event) => {
     setPhoneNumber(event.target.value);
@@ -43,6 +38,6 @@ export default props => {
           onChange={handlePhoneNumberChange}
         />
       </Grid>
-    </Grid >
+    </Grid>
   );
 };

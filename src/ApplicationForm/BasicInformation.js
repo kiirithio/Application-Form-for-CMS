@@ -5,13 +5,13 @@ import axios from 'axios';
 import { TextField, Grid, Select, MenuItem, FormControl, InputLabel } from "@material-ui/core";
 //CONTEXT
 import { ApplicantContext } from "./ApplicantContext";
+import { API_URL } from "../constants";
 
 export default props => {
 
   const [state] = useContext(ApplicantContext);
   const { user, errors } = state;
 
-  const API_URL = 'http://127.0.0.1:8007/api/method/upeoeducation.services.rest.';
 
   const [programs, setPrograms] = useState([]);
   const [studentCategories, setStudentCategories] = useState([]);

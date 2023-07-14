@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 export const ApplicantContext = createContext([{}, () => {}]);
 
 export default props => {
@@ -26,10 +26,42 @@ export default props => {
       national_id: "",
       acceptTerms: false,
       newsletter: false,
-      selectedFile: []
+      selectedFile: [],
+      referral: "" 
     },
-    errors: {}
+    errors: {},
+    referrer: {
+      first_name: "",
+      last_name: "",
+      email: "",
+      mobile_number: "",
+      referrer_parameter: "",
+      referral: "" 
+    }
   });
+
+  useEffect(() => {
+    // Function to extract referral parameter from URL
+    const getReferralParameter = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const referralParam = urlParams.get("referral");
+
+      if (referralParam) {
+        setState(prevState => ({
+          ...prevState,
+          user: {
+            ...prevState.user,
+            referral: referralParam
+          }
+        }));
+        console.log("Referral Parameter:", referralParam);
+      }
+    };
+
+    getReferralParameter();
+  }, []);
+
+
   return (
     <ApplicantContext.Provider value={[state, setState]}>
       {props.children}

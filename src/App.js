@@ -7,7 +7,9 @@ import {
 } from '@material-ui/core';
 import ApplicationForm from './ApplicationForm';
 import ApplicantContextProvider from "./ApplicationForm/ApplicantContext";
+import { primaryColor, titleColor, titleFont } from './constants';
 
+// const title2Color = 'linear-gradient(to right, #f45c20, #ff7f50)'; 
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: "100vh",
@@ -20,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
-    backgroundColor: "rgb(47, 33, 95)",
+    justifyContent: "center",
+    backgroundColor: primaryColor,
     [theme.breakpoints.down("sm")]: {
       flexDirection: "row",
       alignItems: "center",
@@ -29,11 +32,13 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   title: {
-    color: theme.palette.primary.contrastText,
-    marginBottom: theme.spacing(1)
+    color: titleColor,
+    marginBottom: theme.spacing(2),
+    fontFamily: titleFont
   },
   subtitle: {
-    color: theme.palette.primary.light,
+    color: titleColor,
+    fontFamily: titleFont,
     [theme.breakpoints.down("sm")]: {
       "& .MuiTypography-root": {
         display: "none"
@@ -47,25 +52,27 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   logotitle: {
-    color: theme.palette.primary.contrastText,
+    color: titleColor,
     flexGrow: 1,
     textAlign: 'center',
     fontWeight: 'bold',
     marginBottom: theme.spacing(3)
   },
   logo: {
-    height: '100px',
-    width: '130px',
     marginLeft: 'auto',
     marginRight: 'auto',
+    height: '60px',
+    borderRadius: '10px',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(6),
     [theme.breakpoints.down("sm")]: {
-      height: '50px',
-      width: '65px',
-      marginRight: 0,
+      
+      height: '30px',
+      marginBottom: theme.spacing(0),
     }
   },
   top: {
-    marginBottom: theme.spacing(30),
+    marginBottom: theme.spacing(3),
     [theme.breakpoints.down("sm")]: {
       marginBottom: theme.spacing(1),
       marginRight: theme.spacing(2),
@@ -78,24 +85,25 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
+
   return (
     <ApplicantContextProvider>
       <Grid container className={classes.root}>
         <Grid item className={classes.header} xs={12} md={4}>
           <Grid className={classes.top} >
-            <img src='ittc_logo.png' alt="Logo" className={classes.logo} />
+            <img src='elimupro_logo.png' alt="Logo" className={classes.logo} />
             <Hidden xsDown>
-              <Typography variant="h5" className={classes.logotitle}>
-                International Teaching & Training Centre - ITTC
+              <Typography variant="h4" className={classes.logotitle}>
+                Upeosoft College
               </Typography>
             </Hidden>
           </Grid>
           <Grid className={classes.pagetitle} >
-            <Typography variant='h4' className={classes.title}>
+            <Typography variant='h5' className={classes.title}>
               Application Form
             </Typography>
             <Hidden xsDown>
-              <Typography variant='h5' className={classes.subtitle}>
+              <Typography variant='h6' className={classes.subtitle}>
                 Complete all steps to finish the application process
               </Typography>
             </Hidden>
@@ -109,9 +117,4 @@ function App() {
   );
 }
 
-export default App
-
-
-
-
-
+export default App;

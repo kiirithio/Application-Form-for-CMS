@@ -21,6 +21,7 @@ import Button from "@material-ui/core/Button";
 //CONTEXT
 import { ApplicantContext } from "./ApplicantContext";
 import axios from "axios";
+import { API_URL, buttonColor, buttonHoverColor } from "../constants";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,6 +43,14 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2, 0)
   },
   button: {
+    marginRight: theme.spacing(2),
+    backgroundColor: buttonColor,
+    '&:hover': {
+      backgroundColor: buttonHoverColor, 
+    },
+  },
+  
+  buttonBack: {
     marginRight: theme.spacing(2)
   },
   error: {
@@ -56,7 +65,7 @@ const useStyles = makeStyles(theme => ({
   },
   footerWrapper: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     position: "fixed",
     bottom: 0,
     left: 0,
@@ -75,6 +84,14 @@ const useStyles = makeStyles(theme => ({
   },
   contentWrapper: {
     paddingBottom: theme.spacing(10)
+  },
+  link: {
+    color: "inherit",
+    textDecoration: "none",
+    cursor: "pointer",
+    "&:hover": {
+      textDecoration: "underline"
+    }
   }
   
   
@@ -91,7 +108,6 @@ export default props => {
   const [open, setOpen] = React.useState(false);
   const [state, setState] = useContext(ApplicantContext);
 
-  const API_URL = 'http://127.0.0.1:8007/api/method/upeoeducation.services.rest.';
 
   const token = '49ec9faac59a614';
   const secretKey = '2f73a8570ef8ebf';
@@ -196,8 +212,8 @@ export default props => {
     <Fragment>
       <div className={classes.contentWrapper}>
       {!completed && (
-        <Box className={classes.root}>
-          <Stepper activeStep={activeStep} orientation='vertical'>
+        <Box className={classes.root} >
+          <Stepper activeStep={activeStep} orientation='vertical' >
             {steps.map((label, index) => {
               const labelProps = {};
               if (isStepOptional(index)) {
@@ -207,8 +223,8 @@ export default props => {
               }
 
               return (
-                <Step key={index}>
-                  <StepLabel {...labelProps}>{label}</StepLabel>
+                <Step key={index} >
+                  <StepLabel {...labelProps} >{label}</StepLabel>
                   <StepContent>
                     <form
                       onSubmit={handleSubmit}
@@ -220,7 +236,7 @@ export default props => {
                       <div className={classes.buttonsContainer}>
                         <Button
                           disabled={activeStep === 0}
-                          className={classes.button}
+                          className={classes.buttonBack}
                           variant='contained'
                           onClick={handleBack}
                         >
@@ -291,8 +307,13 @@ export default props => {
       )}
       </div>
       <div className={classes.footerWrapper}>
-    <Typography variant='caption' className={classes.footer}>© Copyright 2023 | Upeosoft Limited</Typography>
-    </div>
+        <Typography variant='caption' className={classes.footer}>
+          &copy; {new Date().getFullYear()}{" "}
+          <a href="https://upeosoft.com/" target="_blank" rel="noopener noreferrer" className={classes.link}>
+          | Upeosoft Limited |
+          </a>
+        </Typography>
+      </div>
     </Fragment>
   );
 };
