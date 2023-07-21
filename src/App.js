@@ -34,7 +34,10 @@ const useStyles = makeStyles((theme) => ({
   title: {
     color: titleColor,
     marginBottom: theme.spacing(2),
-    fontFamily: titleFont
+    fontFamily: titleFont,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: '18px',
+    }
   },
   subtitle: {
     color: titleColor,
@@ -94,7 +97,7 @@ function App() {
             <img src='elimupro_logo.png' alt="Logo" className={classes.logo} />
             <Hidden xsDown>
               <Typography variant="h4" className={classes.logotitle}>
-                Upeosoft College
+                Upeosoft College of Engineering
               </Typography>
             </Hidden>
           </Grid>

@@ -140,7 +140,7 @@ export default props => {
       </Grid>
       <Grid item xs={12} lg={6}>
         <TextField
-          placeholder="Type your mobile number"
+          placeholder="Input mobile number 07..."
           name='student_mobile_number'
           value={user.student_mobile_number}
           label='Mobile Number'
@@ -148,9 +148,10 @@ export default props => {
           margin='normal'
           inputProps={{
             minLength: 9,
-            maxLength: 15,
+            maxLength: 10,
             pattern: "^[+]?[0-9]*$",
-            inputMode: "numeric"
+            inputMode: "numeric",
+            readOnly: true
           }}
           InputLabelProps={{
             shrink: true

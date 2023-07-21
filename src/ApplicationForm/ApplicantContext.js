@@ -20,15 +20,17 @@ export default props => {
       town: "",
       county: "",
       country: "",
-      kcse_certificate: "",
+      kcse_certificate: [],
       other_document: "",
       image: "",
       national_id: "",
       acceptTerms: false,
       newsletter: false,
       selectedFile: [],
-      referral: "" 
+      referral: "",
+      random_string: ""
     },
+
     errors: {},
     referrer: {
       first_name: "",
@@ -54,7 +56,6 @@ export default props => {
             referral: referralParam
           }
         }));
-        console.log("Referral Parameter:", referralParam);
       }
     };
 

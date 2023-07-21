@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 //MY MODULES
 import OtherDetails from "./OtherDetails";
@@ -141,14 +141,23 @@ export default props => {
     const phoneNumber = applicantData.student_mobile_number
     if (phoneNumber && phoneNumber.toString().length > 8 && !isNaN(phoneNumber)) {
       axios
-        .post(API_URL + "post_applicant_phone_number", { phoneNumber: phoneNumber })
+        .post(API_URL + "post_applicant_phone_number", { phoneNumber: phoneNumber})
         .then((response) => console.log(response))
         .catch((error) => console.log(error));
     }
   };
 
+  const attachmentsRef = useRef(null);
+
+  const handleSubmitInChild = () => {
+    if (attachmentsRef.current) {
+      attachmentsRef.current.handleSubmit();
+    }
+  };
+
 
   const handleSubmitData = e => {
+    console.log(applicantData);
     e.preventDefault();
     axios
       .post(API_URL + 'create_student_applicant', { applicantData },
@@ -166,6 +175,7 @@ export default props => {
       });
     setCompleted(true)
   }
+
   
 
   const getStepContent = step => {
@@ -177,7 +187,7 @@ export default props => {
       case 2:
         return <OtherDetails />;
       case 3:
-        return <Attachments />;
+        return <Attachments ref={attachmentsRef} />;
       case 4:
         return <ApplicantSummary />;
       default:
@@ -253,7 +263,18 @@ export default props => {
                             Next
                           </Button>
                         )}
-                        {activeStep < steps.length - 1 && activeStep !== 0 &&(
+                        {activeStep === 3 && (
+                          <Button
+                            type='submit'
+                            className={classes.button}
+                            variant='contained'
+                            color='primary'
+                            onClick={handleSubmitInChild}
+                          >
+                            Next
+                          </Button>
+                        )}
+                        {activeStep < steps.length - 1 && activeStep !== 0 && activeStep !== 3 &&(
                           <Button
                             type='submit'
                             className={classes.button}
