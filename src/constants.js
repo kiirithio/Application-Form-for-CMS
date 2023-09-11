@@ -1,11 +1,11 @@
-const API_URL = 'http://127.0.0.1:8007/api/method/upeoeducation.services.rest.';
-// const API_URL = 'https://bipul.upeosoft.com/api/method/upeoeducation.services.rest.';
+const API_URL = 'http://127.0.0.1:8014/api/method/upeoeducation.services.rest.';
+// const API_URL = 'https://rakf.elimupro.com/api/method/upeoeducation.services.rest.';
 
-const primaryColor = '#f8f8f9';
+const primaryColor = '#F8F8F9';
 const secondaryColor = 'blue';
-const titleColor = '#014f86';
-const buttonColor = '#f45c20';
-const buttonHoverColor = '#ff7f50'
+const titleColor = 'black';
+const buttonColor = '#00A650';
+const buttonHoverColor = '#33D175';
 const titleFont = "Poppins,Roboto,Helvetica,Arial,sans-serif;"
 module.exports = {API_URL, primaryColor, secondaryColor, titleColor, buttonColor, buttonHoverColor, titleFont}
 

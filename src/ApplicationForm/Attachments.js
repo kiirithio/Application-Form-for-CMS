@@ -62,7 +62,6 @@ const Attachments = forwardRef(({ onSubmit }, ref) => {
 
   return (
     <Grid container spacing={2}>
-      {/* Your form fields here */}
       <Grid item xs={12} lg={6}>
         <TextField
           type="file"

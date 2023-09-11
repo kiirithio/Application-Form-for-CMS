@@ -71,6 +71,7 @@ export default props => {
           }}
           error={!!errors["date_of_birth"]}
           fullWidth={isWidthDown("sm")}
+          required
         />
       </Grid>
       <Grid item xs={12} lg={6} >

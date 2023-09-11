@@ -16,7 +16,7 @@ export default props => {
     <Grid container spacing={2}>
       <Grid item xs={12} lg={6}>
         <TextField
-          placeholder="Type your mobile number"
+          placeholder="e.g. 0787893590"
           type="tel"
           name='student_mobile_number'
           value={phoneNumber}
@@ -25,7 +25,7 @@ export default props => {
           margin='normal'
           inputProps={{
             minLength: 9,
-            maxLength: 15,
+            maxLength: 10,
             pattern: "^[+]?[0-9]*$",
             inputMode: "numeric"
           }}

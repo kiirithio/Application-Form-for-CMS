@@ -94,10 +94,10 @@ function App() {
       <Grid container className={classes.root}>
         <Grid item className={classes.header} xs={12} md={4}>
           <Grid className={classes.top} >
-            <img src='elimupro_logo.png' alt="Logo" className={classes.logo} />
+            <img src='rakti.jpg' alt="Logo" className={classes.logo} />
             <Hidden xsDown>
               <Typography variant="h4" className={classes.logotitle}>
-                Upeosoft College of Engineering
+                Rural Aid Kenya Foundation
               </Typography>
             </Hidden>
           </Grid>
@@ -107,7 +107,7 @@ function App() {
             </Typography>
             <Hidden xsDown>
               <Typography variant='h6' className={classes.subtitle}>
-                Complete all steps to finish the application process
+                Complete all steps to finish the application process.
               </Typography>
             </Hidden>
           </Grid>

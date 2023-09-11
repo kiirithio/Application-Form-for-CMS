@@ -54,31 +54,12 @@ export default props => {
   const [academic_year, handleAcademicYearChange] = useFormInput('', 'academic_year');
   const [academic_term, handleAcademicTermChange] = useFormInput('', 'academic_term');
 
-  const handleEmailCheck = () => {
-    const studentEmail = user.student_email_id; 
-  
-    axios
-      .post(API_URL + 'check_if_email_exists', { email: studentEmail })
-      .then((response) => {
-        const emailExists = response.data;
-        if (emailExists) {
-          // window.alert('Email already exists.')
-        } else {
-          // Email does not exist
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  
-
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} lg={4} >
         <TextField
-          placeholder='Type your first name here'
+          placeholder='First Name'
           name='first_name'
           label='First Name'
           value={user.first_name}
@@ -93,7 +74,7 @@ export default props => {
       </Grid>
       <Grid item xs={12} lg={4} >
         <TextField
-          placeholder='Type your middle name here'
+          placeholder='Middle Name'
           name='middle_name'
           label='Middle Name'
           value={user.middle_name}
@@ -107,7 +88,7 @@ export default props => {
       </Grid>
       <Grid item xs={12} lg={4} >
         <TextField
-          placeholder='Type your surname here'
+          placeholder='Last Name'
           name='last_name'
           label='Surname'
           value={user.last_name}
@@ -122,7 +103,7 @@ export default props => {
       </Grid>
       <Grid item xs={12} lg={6}>
         <TextField
-          placeholder='Type your email here'
+          placeholder='Email Address'
           name='student_email_id'
           label='Email'
           value={user.student_email_id}
@@ -133,7 +114,6 @@ export default props => {
             shrink: true
           }}
           error={!!errors["student_email_id"]}
-          onBlur={handleEmailCheck}
           required
           fullWidth
         />
@@ -164,19 +144,50 @@ export default props => {
 
       <Grid item xs={12} lg={6}>
         <TextField
-          placeholder='Type your KCSE Grade'
+          placeholder='KCSE or KCPE Grade'
           name='kcse_grade'
-          label='KCSE Grade'
+          label='KCSE/KCPE Grade'
           value={user.kcse_grade}
           variant='outlined'
           margin='normal'
           InputLabelProps={{
             shrink: true
           }}
-          required
           error={!!errors["kcse_grade"]}
+          required
           fullWidth
         />
+      </Grid>
+      <Grid item xs={12} lg={6}>
+        <TextField
+          placeholder='KCSE or KCPE Index No.'
+          name='kcse_index_number'
+          label='KCSE/KCPE Index Number'
+          value={user.kcse_index_number}
+          variant='outlined'
+          margin='normal'
+          InputLabelProps={{
+            shrink: true
+          }}
+          fullWidth
+        />
+      </Grid>
+      <Grid item xs={12} lg={6}>
+        <FormControl variant="outlined" fullWidth margin='normal'>
+          <InputLabel>Course</InputLabel>
+          <Select
+            value={program}
+            name='program'
+            onChange={handleProgramChange}
+            label="Course"
+            required
+            error={!!errors["program"]}
+          >
+            {programs.map((program, index) => (
+              <MenuItem key={index} value={program.program_name}>{program.program_name}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </Grid>
       <Grid item xs={12} lg={6}>
         <FormControl variant="outlined" fullWidth margin='normal'>
@@ -191,23 +202,6 @@ export default props => {
           >
             {studentCategories.map((studentCategory, index) => (
               <MenuItem key={index} value={studentCategory.category}>{studentCategory.category}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid item xs={12}>
-        <FormControl variant="outlined" fullWidth margin='normal'>
-          <InputLabel>Program</InputLabel>
-          <Select
-            value={program}
-            name='program'
-            onChange={handleProgramChange}
-            label="Program"
-            required
-            error={!!errors["program"]}
-          >
-            {programs.map((program, index) => (
-              <MenuItem key={index} value={program.program_name}>{program.program_name}</MenuItem>
             ))}
           </Select>
         </FormControl>

@@ -38,7 +38,7 @@ export default props => {
           <Typography variant='body2'>{applicantData.last_name+" " + applicantData.first_name+" " + applicantData.middle_name}</Typography>
         </Grid>
         <Grid item xs={12} lg={6}>
-          <Typography variant='subtitle2'><strong>Program</strong></Typography>
+          <Typography variant='subtitle2'><strong>Course</strong></Typography>
           <Typography variant='body2'>{applicantData.program}</Typography>
         </Grid>
         <Grid item xs={12} lg={6}>

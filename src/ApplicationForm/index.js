@@ -1,11 +1,11 @@
-import React, { Fragment, useContext, useRef } from "react";
+import React, { Fragment, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 //MY MODULES
 import OtherDetails from "./OtherDetails";
 import BasicInformation from "./BasicInformation";
 import ApplicantSummary from "./ApplicantSummary";
 import FormComplete from "./FormComplete";
-import Attachments from "./Attachments";
+// import Attachments from "./Attachments";
 import GetStarted from "./GetStarted";
 
 //GENERAL
@@ -97,7 +97,7 @@ const useStyles = makeStyles(theme => ({
   
 }));
 
-const steps = ["Get Started", "Basic Information", "Other Details", "Attachments", "Summary"];
+const steps = ["Get Started", "Basic Information", "Other Details", "Summary"];
 
 //MAIN COMPONENT
 export default props => {
@@ -107,6 +107,7 @@ export default props => {
   const [errors] = React.useState({});
   const [open, setOpen] = React.useState(false);
   const [state, setState] = useContext(ApplicantContext);
+  const { user} = state;
 
 
   const token = '49ec9faac59a614';
@@ -147,17 +148,35 @@ export default props => {
     }
   };
 
-  const attachmentsRef = useRef(null);
+  // const attachmentsRef = useRef(null);
 
-  const handleSubmitInChild = () => {
-    if (attachmentsRef.current) {
-      attachmentsRef.current.handleSubmit();
-    }
+  // const handleSubmitInChild = () => {
+  //   if (attachmentsRef.current) {
+  //     attachmentsRef.current.handleSubmit();
+  //   }
+  // };
+
+  const handleEmailCheck = () => {
+    const studentEmail = user.student_email_id; 
+  
+    axios
+      .post(API_URL + 'check_if_email_exists', { email: studentEmail })
+      .then((response) => {
+        const emailExists = response.data.message;
+        if (emailExists === user.student_email_id) {
+          alert('Email already exists.')
+          setActiveStep(prevActiveStep => prevActiveStep - 1)
+        } else {
+          // Email does not exist
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
 
   const handleSubmitData = e => {
-    console.log(applicantData);
     e.preventDefault();
     axios
       .post(API_URL + 'create_student_applicant', { applicantData },
@@ -187,8 +206,6 @@ export default props => {
       case 2:
         return <OtherDetails />;
       case 3:
-        return <Attachments ref={attachmentsRef} />;
-      case 4:
         return <ApplicantSummary />;
       default:
         return "Unknown step";
@@ -263,18 +280,18 @@ export default props => {
                             Next
                           </Button>
                         )}
-                        {activeStep === 3 && (
+                        {activeStep === 1 && (
                           <Button
                             type='submit'
                             className={classes.button}
                             variant='contained'
                             color='primary'
-                            onClick={handleSubmitInChild}
+                            onClick={handleEmailCheck}
                           >
                             Next
                           </Button>
                         )}
-                        {activeStep < steps.length - 1 && activeStep !== 0 && activeStep !== 3 &&(
+                        {activeStep < steps.length - 1 && activeStep !== 0 && activeStep !== 1 &&(
                           <Button
                             type='submit'
                             className={classes.button}
